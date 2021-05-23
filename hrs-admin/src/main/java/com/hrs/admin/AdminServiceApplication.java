@@ -1,6 +1,7 @@
 package com.hrs.admin;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.hrs.security.EnableJwtSecurity;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -13,6 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableEurekaClient
 @EnableFeignClients(basePackages = {"com.hrs.parcel.client.**"})
 @EnableSwagger2
+@EnableJwtSecurity
 @ComponentScan(basePackages = {"com.hrs.admin.config","com.hrs.admin"})
 public class AdminServiceApplication {
 

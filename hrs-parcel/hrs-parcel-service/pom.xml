@@ -48,5 +48,9 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.hrs</groupId>
+            <artifactId>hrs-jwt-security</artifactId>
+        </dependency>
     </dependencies>
 </project>

@@ -81,4 +81,7 @@ public class ParcelController {
 
     // TODO 丢失登记、清理寄存柜、赔偿、收费、极端情况后门等拓展
 
+
+    // TODO 定时任务根据存记录中start_time、end_time不空时判断当前时刻，更新寄存柜逾期、存记录逾期状态
+
 }

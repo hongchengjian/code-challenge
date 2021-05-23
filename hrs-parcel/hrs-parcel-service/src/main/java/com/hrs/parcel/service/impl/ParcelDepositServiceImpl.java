@@ -93,6 +93,7 @@ public class ParcelDepositServiceImpl extends BaseServiceImpl<ParcelDepositMappe
         UpdateWrapper depositWrapper = new UpdateWrapper();
         // 更新前上一个状态 防串状态
         depositWrapper.eq("deposit_status", lastStatus.getCode());
+        depositWrapper.eq("deposit_no", parcelDeposit.getDepositNo());
         return update(parcelDeposit, depositWrapper);
     }
 }

@@ -43,6 +43,9 @@
         <junit.version>4.12</junit.version>
         <springtest.version>5.3.6</springtest.version>
         <springboot.configuration.version>2.1.6.RELEASE</springboot.configuration.version>
+        <jsonwebtoken.version>0.9.0</jsonwebtoken.version>
+        <spring-security-jwt.version>1.0.10.RELEASE</spring-security-jwt.version>
+        <springboot--security>1.5.19.RELEASE</springboot--security>
     </properties>
 
     <dependencyManagement>
@@ -70,6 +73,11 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
             </dependency>
             <dependency>
@@ -81,6 +89,21 @@
                 <artifactId>spring-cloud-netflix-eureka-client</artifactId>
             </dependency>
             <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jsonwebtoken.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-jwt</artifactId>
+                <version>${spring-security-jwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>${springboot--security}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${baomidou-mybatis-plus.version}</version>
@@ -90,6 +113,7 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql-connector.version}</version>
             </dependency>
+            <!--  也可单独维护版本，这里图省事          -->
             <dependency>
                 <groupId>com.hrs</groupId>
                 <artifactId>hrs-parcel-feign-client</artifactId>
@@ -98,6 +122,11 @@
             <dependency>
                 <groupId>com.hrs</groupId>
                 <artifactId>hrs-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hrs</groupId>
+                <artifactId>hrs-jwt-security</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
