@@ -106,25 +106,37 @@ code chanllenge 适用酒店入离包裹存储的分布式系统。系统前后�
 
 ```
 code-chanllenge
-├── hrs-admin 													前后台对接的管理系统后台服务，由于user服务和auth服务没开发呢，jwt先配置permitUrl允许通过从网关跳转过来的请求，实际上是要验证登陆授权后将角色注入SimpleGrantedAuthority，对外开放的接口 @PreAuthorize("hasAnyRole('ROLE')")验证角色
-├── hrs-auth														登陆、授权、验证 没做 
-├── hrs-common 													工具类、自定义异常、API返回、分页、实体等各种可以抽取公共的（服务层的数据库Dao、Service也可以抽取成公共，项目没做）
-├── hrs-eureka-server 									注册中心
-├── hrs-gateway													网关、路由、限流（目前没做）
-├── hrs-hotel														入离登记、酒店信息维护 没开发
+├── hrs-admin 													
+前后台对接的管理系统后台服务，由于user服务和auth服务没开发呢，jwt先配置permitUrl允许通过从网关跳转过来的请求，实际上是要验证登陆授权后将角色注入SimpleGrantedAuthority，对外开放的接口 @PreAuthorize("hasAnyRole('ROLE')")验证角色
+├── hrs-auth														
+登陆、授权、验证 没做 
+├── hrs-common 													
+工具类、自定义异常、API返回、分页、实体等各种可以抽取公共的（服务层的数据库Dao、Service也可以抽取成公共，项目没做）
+├── hrs-eureka-server 									
+注册中心
+├── hrs-gateway													
+网关、路由、限流（目前没做）
+├── hrs-hotel														
+入离登记、酒店信息维护 没开发
 │   ├── hrs-hotel-feign-client
 │   ├── hrs-hotel-service
-├── hrs-jwt-security  									安全和token, 启动类加了自定义注解@EnableJwtSecurity，permitUrl不放开，是不能直接调Controller
-├── hrs-parcel 													包裹、寄存柜、存、取、查
+├── hrs-jwt-security  									
+安全和token, 启动类加了自定义注解@EnableJwtSecurity，permitUrl不放开，是不能直接调Controller
+├── hrs-parcel 													
+包裹、寄存柜、存、取、查
 │   ├── hrs-parcel-feign-client					
 │   ├── hrs-parcel-service
-├── hrs-user 														来宾、酒店接待、系统管理员维护，没开发
+├── hrs-user 														
+来宾、酒店接待、系统管理员维护，没开发
 │   ├── hrs-user-feign-client
 │   ├── hrs-user-service
 └── zip
-    ├── jar 														项目之间依赖的jar和可执行的服务jar
-    ├── pdf 														文档说明
-    └── sql-script 											脚本SQL PMO号-任务号-优先级-日期-库名-
+    ├── jar 														
+    项目之间依赖的jar和可执行的服务jar
+    ├── pdf 														
+    文档说明
+    └── sql-script 											
+    脚本SQL PMO号-任务号-优先级-日期-库名-
 
 XX-feign-client是服务之间调用，通过feign-client来调内部的具体子服务
 ```
