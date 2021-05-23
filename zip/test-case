@@ -1,0 +1,43 @@
+寄存柜查
+curl -X GET \
+  'http://192.168.1.5:8089/admin/parcel/cabinet?pageNumber=3&pageSize=2' \
+  -H 'cache-control: no-cache' \
+  -H 'postman-token: 281750d0-2e16-cc6a-3f35-1ed280471da3'
+
+存
+curl -X PUT \
+	  http://192.168.1.5:8089/admin/parcel/deposit \
+	  -H 'cache-control: no-cache' \
+	  -H 'content-type: application/json' \
+	  -H 'postman-token: 0a62eb31-34b0-cda0-75b8-4205206d45fe' \
+	  -d '{
+		"cabinetNo":"NO0001",
+		"adminId":1,
+		"depositorName":"hcj",
+		"depositorMobile":"13761575193",
+		"remark":"存测试"
+	}'
+
+取
+curl -X PUT \
+  http://192.168.1.5:8089/admin/parcel/pickup \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -H 'postman-token: 2e547756-c117-e5b0-e64d-182c172d842f' \
+  -d '{
+	"cabinetNo":"NO0001",
+	"depositNo":"D809c3e74-2d51-4e27-a142-e702d6aac382",
+	"adminId":1,
+	"depositorName":"hcj",
+	"depositorMobile":"13761575193",
+	"recipientName":"hcj",
+	"recipientMobile":"13761575193",
+	"pickupType":0
+}'
+
+存记录查
+curl -X GET \
+  http://192.168.1.5:8089/internal/parcel/deposit/list \
+  -H 'cache-control: no-cache' \
+  -H 'postman-token: 66e4dba9-90a2-581e-a45a-efc7a433a431'
+

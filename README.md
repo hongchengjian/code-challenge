@@ -65,11 +65,9 @@ feign client跨服务调用get请求传递问题，考虑get请求的参数太�
 关于入离、酒店是否允许
 
 关联酒店信息查询：酒店名称、地址、地域、酒店联系电话、酒店地址
-Parcel寄存：
-		宾客电话号码、宾客姓名、寄存单号、Parcel名称、Parcel数量、Parcel种类、Parcel明细、备注（特征）、操作员、寄存操作时间  寄存
+Parcel寄存：宾客电话号码、宾客姓名、寄存单号、Parcel名称、Parcel数量、Parcel种类、Parcel明细、备注（特征）、操作员、寄存操作时间
 Parcel查询
-离店:
-		Parcel查询、Hotel Room状态、
+离店:Parcel查询、Hotel Room状态
 		Parcel领取+宾客签字+寄存单号核对+Parcel核对
 		寄存收费、押金退还合计	
 		结账
@@ -109,6 +107,7 @@ code chanllenge 适用酒店入离包裹存储的分布式系统。系统前后�
 ```
 code-chanllenge
 ├── hrs-admin 													前后台对接的管理系统后台服务，由于user服务和auth服务没开发呢，jwt先配置permitUrl允许通过从网关跳转过来的请求，实际上是要验证登陆授权后将角色注入SimpleGrantedAuthority，对外开放的接口 @PreAuthorize("hasAnyRole('ROLE')")验证角色
+├── hrs-auth														登陆、授权、验证 没做 
 ├── hrs-common 													工具类、自定义异常、API返回、分页、实体等各种可以抽取公共的（服务层的数据库Dao、Service也可以抽取成公共，项目没做）
 ├── hrs-eureka-server 									注册中心
 ├── hrs-gateway													网关、路由、限流（目前没做）
@@ -156,11 +155,50 @@ XX-feign-client是服务之间调用，通过feign-client来调内部的具体�
    - 启动 `hrs-parcel-service`直接运行`com.hrs.parcel.ParcelServiceApplication`的`main`；
    - 启动`hrs-gateway` 直接运行`com.hrs.gateway.GatewayApplication`的`main`；
    
--  查看微服务注册状态： http://{ip}:9000/ 
+-  Eureka注册状态： http://{ip}:9000/ 
 
 -  Swagger文档： http://{ip}:{port}/swagger-ui.html# 只写了1个接口，没继续写各种注解侵入性的代码。Swagger使用参考https://www.jianshu.com/p/349e130e40d5 
 
+   
 
+# 配置整理
+
+后续整到Apollo，只举例，不一一复制粘贴，公用的配置可提取到一起
+
+## hrs-parcel-service
+
+```
+spring.application.name=hrs-parcel-service
+server.port=8087
+
+eureka.client.register-with-eureka=true
+eureka.client.fetchRegistry=true
+eureka.client.service-url.defaultZone=http://localhost:9000/eureka
+
+spring.datasource.username=${DB_USERNAME:root}
+spring.datasource.password=${DB_PASSWORD:root}
+spring.datasource.url=jdbc:mysql://${DB_HOST:127.0.0.1}:3306/${DATABASE_NAME:hrs}?useSSL=false&characterEncoding=utf-8&serverTimezone=GMT%2B8&useTimezone=true&allowMultiQueries=true
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+spring.jackson.generator.WRITE_BIGDECIMAL_AS_PLAIN=true
+spring.jackson.serialization.write-dates-as-timestamps=true
+
+logging.path=${LOG_PATH:/opt/hrs/${spring.application.name}/}
+
+mybatis-plus.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl
+
+jwt.header=${JWT_HEADER:Authorization}
+jwt.secret=${JWT_SECRET:test}
+jwt.expiration=${JWT_EXPIRATION:60}
+jwt.tokenHead=${JWT_TOKEN_HEADER:Bearer }
+# 启动类加了自定义注解@EnableJwtSecurity，permitUrl不放开，是不能直接调Controller
+#security.permitUrl=${SECURITY_PERMITURL:/actuator/**,/internal/**}
+
+security.permitUrl=${SECURITY_PERMITURL:/actuator/**,/internal/**}
+
+```
+
+省略...
 
 
 
