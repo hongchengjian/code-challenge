@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="base">
+  <resultMap type="org.union.czt.model.BaseDomain" id="baseModel">
+    <id property="id" column="id" />
+    <result property="creator" column="creator" />
+    <result property="createTime" column="create_time" />
+    <result property="updater" column="updater" />
+    <result property="createTime" column="create_time" />
+    <result property="deleted" column="deleted" />
+  </resultMap>
+
+  <sql id="notDeleted" >
+    AND deleted = 0
+  </sql>
+</mapper>
